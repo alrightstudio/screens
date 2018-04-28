@@ -9,7 +9,22 @@
 <h2>Projects</h2>
 <ul>
 	{% for entry in entries %}
-	<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+	<li>
+		<a href="{{ entry.url }}">{{ entry.title }}</a> <br/>
+		{% set screen = entry.screens.first() %}
+		{% if screen %}
+			{% if screen.desktop.image.first() %}
+				{% set screenAsset = screen.desktop.image.first() %}
+			{% elseif screen.tablet.image.first() %}
+				{% set screenAsset = screen.tablet.image.first() %}
+			{% elseif screen.mobile.image.first() %}
+				{% set screenAsset = screen.mobile.image.first() %}
+			{% endif %}
+			{% if screenAsset %}
+				<img style="width: 400px; height: 300px;"  src="{{ screenAsset.url }}" />
+			{% endif %}
+		{% endif %}
+	</li>
 	{% endfor %}
 </ul>
 

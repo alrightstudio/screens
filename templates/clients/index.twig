@@ -1,1 +1,21 @@
-nope sorry
+{% extends "_layout" %}
+{% block content %}
+
+{% if currentUser %}
+
+<h1>Clients</h1>
+
+<ul>
+	{% set clients = craft.categories.group('clients') %}
+	{% for client in clients %}
+	<li><a href="{{ client.url }}">{{ client.title }}</a></li>
+	{% endfor %}
+</ul>
+
+{% else %}
+
+{% redirect '404' %}
+
+{% endif %}
+
+{% endblock %}

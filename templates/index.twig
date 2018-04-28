@@ -1,1 +1,19 @@
-alright studio's projects
+{% extends "_layout" %}
+{% block content %}
+
+{% if currentUser %}
+
+<h1>Screens</h1>
+
+<ul>
+	<li><a href="/clients">Clients</a></li>
+	<li><a href="/projects">Projects</a></li>
+</ul>
+
+{% else %}
+
+{% redirect '404' %}
+
+{% endif %}
+
+{% endblock %}

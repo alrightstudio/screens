@@ -14,7 +14,7 @@
 <ol>
 	{% for screen in entry.screens %}
 	<li>
-		<b>{{ screen.screenTitle }}</b> <br/>
+		<b>{{ screen.screenTitle }}</b> - {{ screen.id }} <br/>
 		<ul>
 			{% if screen.desktop.image|length %}
 			{% set desktopScreen = screen.desktop.image.first() %}

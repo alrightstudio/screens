@@ -1,1 +1,20 @@
-nope sorry
+{% extends "_layout" %}
+{% block content %}
+
+{% if currentUser %}
+
+<h1>Projects</h1>
+
+<ul>
+	{% for project in craft.entries.section('projects') %}
+	<li><a href="{{ project.url }}">{{ project.title }}</a></li>
+	{% endfor %}
+</ul>
+
+{% else %}
+
+{% redirect '404' %}
+
+{% endif %}
+
+{% endblock %}
