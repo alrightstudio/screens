@@ -1,0 +1,29 @@
+{% set title = entry.title %}
+
+{% extends "_layout" %}
+{% block content %}
+
+<h1>{{ entry.title }}</h1>
+
+<p><a href="{{ entry.client.first().url }}">All Projects</a></p>
+
+<hr/>
+
+<h2>Screens</h2>
+
+<ol>
+	{% for screen in entry.screens %}
+	<li>
+		<b>{{ screen.screenTitle }}</b> <br/>
+		<ul>
+			{% if screen.desktop.image|length %}
+			{% set desktopScreen = screen.desktop.image.first() %}
+			<li>Desktop - (<a href="{{desktopScreen.url}}">{{ desktopScreen.filename }}</a>)</li>
+			{% endif %}
+		</ul>
+	</li>
+	{% endfor %}
+</ol>
+
+
+{% endblock %}

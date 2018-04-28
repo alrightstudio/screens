@@ -1,0 +1,16 @@
+{% set title = category.title %}
+{% set entries = craft.entries.relatedTo(category) %}
+
+{% extends "_layout" %}
+{% block content %}
+
+<h1>{{ category.title }}</h1>
+
+<h2>Projects</h2>
+<ul>
+	{% for entry in entries %}
+	<li><a href="{{ entry.url }}">{{ entry.title }}</a></li>
+	{% endfor %}
+</ul>
+
+{% endblock %}
