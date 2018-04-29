@@ -36,6 +36,19 @@ $ sh scripts/set-permissions.sh
 $ yarn start
 ```
 
+## Deploying to Production
+
+1. Add Fortrabbit as a GIT remote, named `production`.
+2. Run the `deploy.sh` script. Your GIT password is the fortrabbit account password.
+
+```
+$ sh scripts/deploy.sh
+```
+
+This will do a few things - compress assets, commit those as a new deployment to the repo, and push to the `production` branch.
+
+----
+
 ## To Do
 
 * Proper migration for setup
