@@ -1,6 +1,12 @@
 .project-tile {
 	img {
 		border-radius: 4px;
+		max-height: 200px;
+		max-width: 100%;
+		width: auto;
+		height: auto;
+		margin-left: auto;
+		margin-right: auto;
 	}
 
 	&:hover,

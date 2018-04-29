@@ -4505,7 +4505,7 @@ var ProjectHeader = function ProjectHeader(_ref) {
 					{ 'class': 'col c6 c4--lg' },
 					h(
 						'div',
-						{ 'class': 'media media--horizontal media--forward gutter--small align--bottom' },
+						{ 'class': 'media media--horizontal media--forward gutter--small align--middle' },
 						h(
 							'div',
 							{ 'class': 'media__fixed' },
@@ -4628,9 +4628,24 @@ var ProjectViewer = createClass({
 		};
 	},
 	getInitialState: function getInitialState() {
+		var currentScreenIndex = 0;
+		var currentScreenSize = 'desktop';
+		var currentScreen = this.props.screens[currentScreenIndex];
+		var currentImage = currentScreen.images[currentScreenSize];
+
+		// Go to a different screen size if not available
+		if (!currentImage) {
+			for (var i = 0; i < SCREEN_SIZE_ORDER.length; i++) {
+				if (currentScreen.images[SCREEN_SIZE_ORDER[i]]) {
+					currentScreenSize = SCREEN_SIZE_ORDER[i];
+					break;
+				}
+			}
+		}
+
 		return {
-			currentScreenIndex: 0,
-			currentScreenSize: 'desktop'
+			currentScreenIndex: currentScreenIndex,
+			currentScreenSize: currentScreenSize
 		};
 	},
 	componentDidMount: function componentDidMount() {

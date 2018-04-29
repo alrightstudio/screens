@@ -15,9 +15,24 @@ export default createClass({
 	},
 
 	getInitialState() {
+		const currentScreenIndex = 0;
+		let currentScreenSize = 'desktop';
+		const currentScreen = this.props.screens[currentScreenIndex];
+		const currentImage = currentScreen.images[currentScreenSize];
+
+		// Go to a different screen size if not available
+		if (!currentImage) {
+			for (let i = 0; i < SCREEN_SIZE_ORDER.length; i++) {
+				if (currentScreen.images[SCREEN_SIZE_ORDER[i]]) {
+					currentScreenSize = SCREEN_SIZE_ORDER[i];
+					break;
+				}
+			}
+		}
+
 		return {
-			currentScreenIndex: 0,
-			currentScreenSize: 'desktop',
+			currentScreenIndex,
+			currentScreenSize,
 		};
 	},
 

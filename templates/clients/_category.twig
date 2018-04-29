@@ -5,31 +5,38 @@
 {% block content %}
 
 <div class="grid-container contained pt2 pb2">
-	<h1>
+	<div class="media media--horizontal media--forward gutter--small align--middle">
 		{% if currentUser %}
-		<span><a href="/clients">←</a> </span>
+		<div class="media__fixed">
+			<a class="button--primary" href="/clients">
+				←
+			</a>
+		</div>
 		{% endif %}
-		{{ category.title }}
-	</h1>
+		<div class="media__fluid">
+			<h1>{{ category.title }}</h1>
+		</div>
+	</div>
 </div>
 
 <hr/>
 
-<div class="grid-container contained pt2 pb2 p4--lg">
-	<div class="row">
+<div class="grid-container contained pt4 pb4">
+	<div class="row align--bottom">
 		{% for entry in entries.all() %}
-		<div class="col c6 c4--md c3--lg">
-			<a class="project-tile link--target-hover db" href="{{ entry.url }}">
+		<div class="col c6 c4--md c3--lg mb4 ">
+			<a class="project-tile link--target-hover db tc" href="{{ entry.url }}">
 				{% set screen = entry.screens.one() %}
+				{% set thumbnailTransform = {
+					mode: 'crop',
+					width: 800,
+					height: 600,
+					quality: 75,
+					position: 'top-center'
+				} %}
 				{% if screen %}
 					{% if screen.desktop.desktopImage.one() %}
 						{% set screenAsset = screen.desktop.desktopImage.one() %}
-					{% elseif screen.tablet.tabletImage.one() %}
-						{% set screenAsset = screen.tablet.tabletImage.one() %}
-					{% elseif screen.mobile.mobileImage.one() %}
-						{% set screenAsset = screen.mobile.mobileImage.one() %}
-					{% endif %}
-					{% if screenAsset %}
 						{% set thumbnailTransform = {
 							mode: 'crop',
 							width: 800,
@@ -37,7 +44,27 @@
 							quality: 75,
 							position: 'top-center'
 						} %}
-						<img class="full-width mb1 mb2--lg" src="{{ screenAsset.getUrl(thumbnailTransform) }}" />
+					{% elseif screen.tablet.tabletImage.one() %}
+						{% set screenAsset = screen.tablet.tabletImage.one() %}
+						{% set thumbnailTransform = {
+							mode: 'crop',
+							width: 600,
+							height: 800,
+							quality: 75,
+							position: 'top-center'
+						} %}
+					{% elseif screen.mobile.mobileImage.one() %}
+						{% set screenAsset = screen.mobile.mobileImage.one() %}
+						{% set thumbnailTransform = {
+							mode: 'crop',
+							width: 600,
+							height: 1000,
+							quality: 75,
+							position: 'top-center'
+						} %}
+					{% endif %}
+					{% if screenAsset %}
+						<img class="db mb1 mb2--lg" src="{{ screenAsset.getUrl(thumbnailTransform) }}" />
 					{% endif %}
 				{% endif %}
 				<span class="db link__target">{{ entry.title }}</span>
