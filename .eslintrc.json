@@ -1,0 +1,64 @@
+{
+	"parser": "babel-eslint",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"modules": true,
+			"jsx": true
+		}
+	},
+	"plugins": ["react"],
+	"env": {
+		"node": true,
+		"browser": true
+	},
+	"settings": {
+		"react": {
+			"pragma": "h"
+		}
+	},
+	"extends": "eslint:recommended",
+	"rules": {
+		"react/jsx-no-duplicate-props": 2,
+		"react/self-closing-comp": 2,
+		"react/prefer-es6-class": 2,
+		"react/no-string-refs": 2,
+		"react/require-render-return": 2,
+		"react/no-find-dom-node": 2,
+		"react/no-is-mounted": 2,
+		"react/jsx-no-comment-textnodes": 2,
+		"react/jsx-curly-spacing": 2,
+		"react/jsx-no-undef": 2,
+		"react/jsx-uses-react": 2,
+		"react/jsx-uses-vars": 2,
+		"comma-dangle": [
+			"off"
+		],
+		"indent-legacy": [
+			"warn",
+			"tab",
+			{"SwitchCase": 1}
+		],
+		"linebreak-style": [
+			"error",
+			"unix"
+		],
+		"quotes": [
+			"warn",
+			"single"
+		],
+		"no-console": [
+			"off"
+		],
+		"no-useless-escape": [
+			"off"
+		],
+		"semi": [
+			"warn",
+			"always"
+		],
+		"no-unused-vars": [
+			"warn",
+			{"vars": "all", "args": "none"}
+		]
+	}
+}

@@ -4,28 +4,47 @@
 {% extends "_layout" %}
 {% block content %}
 
-<h1>{{ category.title }}</h1>
-
-<h2>Projects</h2>
-<ul>
-	{% for entry in entries %}
-	<li>
-		<a href="{{ entry.url }}">{{ entry.title }}</a> <br/>
-		{% set screen = entry.screens.first() %}
-		{% if screen %}
-			{% if screen.desktop.desktopImage.first() %}
-				{% set screenAsset = screen.desktop.desktopImage.first() %}
-			{% elseif screen.tablet.tabletImage.first() %}
-				{% set screenAsset = screen.tablet.tabletImage.first() %}
-			{% elseif screen.mobile.mobileImage.first() %}
-				{% set screenAsset = screen.mobile.mobileImage.first() %}
-			{% endif %}
-			{% if screenAsset %}
-				<img style="width: 400px; height: 300px;"  src="{{ screenAsset.url }}" />
-			{% endif %}
+<div class="grid-container contained pt2 pb2">
+	<h1>
+		{% if currentUser %}
+		<span><a href="/clients">←</a> </span>
 		{% endif %}
-	</li>
-	{% endfor %}
-</ul>
+		{{ category.title }}
+	</h1>
+</div>
+
+<hr/>
+
+<div class="grid-container contained pt2 pb2 p4--lg">
+	<div class="row">
+		{% for entry in entries.all() %}
+		<div class="col c6 c4--md c3--lg">
+			<a class="project-tile link--target-hover db" href="{{ entry.url }}">
+				{% set screen = entry.screens.one() %}
+				{% if screen %}
+					{% if screen.desktop.desktopImage.one() %}
+						{% set screenAsset = screen.desktop.desktopImage.one() %}
+					{% elseif screen.tablet.tabletImage.one() %}
+						{% set screenAsset = screen.tablet.tabletImage.one() %}
+					{% elseif screen.mobile.mobileImage.one() %}
+						{% set screenAsset = screen.mobile.mobileImage.one() %}
+					{% endif %}
+					{% if screenAsset %}
+						{% set thumbnailTransform = {
+							mode: 'crop',
+							width: 800,
+							height: 600,
+							quality: 75,
+							position: 'top-center'
+						} %}
+						<img class="full-width mb1 mb2--lg" src="{{ screenAsset.getUrl(thumbnailTransform) }}" />
+					{% endif %}
+				{% endif %}
+				<span class="db link__target">{{ entry.title }}</span>
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+</div>
 
 {% endblock %}

@@ -3,12 +3,19 @@
 
 {% if currentUser %}
 
-<h1>Screens</h1>
+<div class="grid-container contained pt2 pb2">
+	<h1>{{ siteName }}</h1>
+</div>
 
-<ul>
-	<li><a href="/clients">Clients</a></li>
-	<li><a href="/projects">Projects</a></li>
-</ul>
+<hr/>
+
+<div class="grid-container contained pt2 pb2 p4--lg">
+	<ul>
+		<li>🔒 <a class="link" href="/admin">Admin</a></li>
+		<li>👤 <a class="link" href="/clients">Clients</a></li>
+		<li>📱 <a class="link" href="/projects">Projects</a></li>
+	</ul>
+</div>
 
 {% else %}
 

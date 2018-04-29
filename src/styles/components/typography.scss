@@ -1,0 +1,78 @@
+body {
+	@include font-smoothing;
+	font-family: $font-family-body;
+	font-size: $font-size-body;
+	line-height: $line-height-body;
+}
+
+/*
+// === Headlines ===
+*/
+
+.headline--large {
+	font-weight: 600;
+
+	@include breakpoint(md) {
+		font-weight: 300;
+		font-size: 32px;
+		line-height: 32px;
+	}
+
+	@include breakpoint(lg) {
+		font-size: 48px;
+		line-height: 48px;
+	}
+}
+
+.headline--medium {
+	font-weight: 600;
+
+	@include breakpoint(md) {
+		font-weight: 300;
+		font-size: 32px;
+		line-height: 32px;
+	}
+}
+
+/*
+// === Links ===
+*/
+
+.link {
+	text-decoration: underline;
+}
+
+.link--hover:hover,
+.link--hover:focus {
+	text-decoration: underline;
+}
+
+.link--target-hover:hover,
+.link--target-hover:focus {
+	.link__target {
+		text-decoration: underline;
+	}
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.line-break {
+	margin-bottom: $line-height-body;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+/*
+// === HR ===
+*/
+
+hr {
+	margin: 0;
+	padding: 0;
+	border: none;
+	border-bottom: 1px solid black;
+}

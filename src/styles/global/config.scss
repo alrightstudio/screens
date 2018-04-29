@@ -1,0 +1,71 @@
+/*
+// === Config Variables ===
+*/
+
+$all-colors: (
+	white      : #fff,
+	black      : #000,
+	gray       : #1C1C1C,
+	blue       : #0054ff,
+);
+
+$breakpoints : (
+	xs : 400px,
+	sm : 600px,
+	md : 800px,
+	lg : 1000px,
+	xl : 1200px
+);
+
+$column-sizes: 12;
+$grid-gutter: 20px;
+$grid-gutter-extra: (
+	none     : 0px,
+	smaller  : 5px,
+	small    : 10px,
+	default  : $grid-gutter,
+	large    : 40px,
+);
+
+$grid-padding-mobile: 15px;
+$grid-padding-tablet: 20px;
+$grid-padding-desktop: 40px;
+$grid-max-width: 1440px;
+
+$font-family-body: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Ubuntu,Helvetica Neue,sans-serif;
+$font-size-body: 18px;
+$line-height-body: 32px;
+
+/*
+// === Config Getter Functions ===
+*/
+
+@function color($color-name) {
+	$color-found: map-has-key($all-colors, $color-name);
+	@if ($color-found == true) {
+		@return map-get($all-colors, $color-name);
+	} @else {
+		@warn "Color " + #{$color-name} + " doesn't exist.";
+	}
+}
+
+@mixin breakpoint($size) {
+	$breakpoint-found: map-has-key($breakpoints, $size);
+	@if ($breakpoint-found == true) {
+		$breakpoint: map-get($breakpoints, $size);
+		@media (min-width: #{$breakpoint}) {
+			@content;
+		}
+	} @else {
+		@warn "Breakpoint size " + #{$size} + " doesn't exist."
+	}
+}
+
+@function gutter($gutter-name) {
+	$gutter-found: map-has-key($grid-gutter-extra, $gutter-name);
+	@if ($gutter-found == true) {
+		@return map-get($grid-gutter-extra, $gutter-name);
+	} @else {
+		@warn "Gutter " + #{$gutter-name} + " doesn't exist.";
+	}
+}

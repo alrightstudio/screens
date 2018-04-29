@@ -1,0 +1,1 @@
+export const STAGE_BACKGROUND = '#000';

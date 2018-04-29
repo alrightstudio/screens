@@ -3,14 +3,20 @@
 
 {% if currentUser %}
 
-<h1>Clients</h1>
+<div class="grid-container contained pt2 pb2">
+	<h1><a href="/">←</a> Clients</h1>
+</div>
 
-<ul>
-	{% set clients = craft.categories.group('clients') %}
-	{% for client in clients %}
-	<li><a href="{{ client.url }}">{{ client.title }}</a></li>
-	{% endfor %}
-</ul>
+<hr/>
+
+<div class="grid-container contained pt2 pb2 p4--lg">
+	<ul>
+		{% set clients = craft.categories.group('clients') %}
+		{% for client in clients.all() %}
+		<li><a class="link" href="{{ client.url }}">{{ client.title }}</a></li>
+		{% endfor %}
+	</ul>
+</div>
 
 {% else %}
 

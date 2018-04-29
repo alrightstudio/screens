@@ -3,27 +3,46 @@
 {% extends "_layout" %}
 {% block content %}
 
-<h1>{{ entry.title }}</h1>
+<div id="mount-project"></div>
 
-<p><a href="{{ entry.client.first().url }}">All Projects</a></p>
+<script>
+	var PROJECT = {{ entry | json_encode | raw }};
+	var CLIENT = {{ entry.client.one() | json_encode | raw }};
+	var SCREENS = [
+		{% for screen in entry.screens.all() %}
+		{
+			id: {{ screen.id }},
+			title: {{ screen.screenTitle | json_encode | raw }},
+			images: {
+				{% if screen.desktop.desktopImage|length %}
+				desktop: {
+					url: {{ screen.desktop.desktopImage.one().url | json_encode | raw }},
+					width: {{ screen.desktop.desktopImage.one().width }},
+					retina: {{ screen.desktop.desktopRetina | json_encode | raw }},
+				},
+				{% endif %}
 
-<hr/>
+				{% if screen.tablet.tabletImage|length %}
+				tablet: {
+					url: {{ screen.tablet.tabletImage.one().url | json_encode | raw }},
+					width: {{ screen.tablet.tabletImage.one().width }},
+					retina: {{ screen.tablet.tabletRetina | json_encode | raw }},
+				},
+				{% endif %}
 
-<h2>Screens</h2>
+				{% if screen.mobile.mobileImage|length %}
+				mobile: {
+					url: {{ screen.mobile.mobileImage.one().url | json_encode | raw }},
+					width: {{ screen.mobile.mobileImage.one().width }},
+					retina: {{ screen.mobile.mobileRetina | json_encode | raw }},
+				},
+				{% endif %}
+			}
+		},
+		{% endfor %}
+	];
+</script>
 
-<ol>
-	{% for screen in entry.screens %}
-	<li>
-		<b>{{ screen.screenTitle }}</b> - {{ screen.id }} <br/>
-		<ul>
-			{% if screen.desktop.desktopImage|length %}
-			{% set desktopScreen = screen.desktop.desktopImage.first() %}
-			<li>Desktop - (<a href="{{desktopScreen.url}}">{{ desktopScreen.filename }}</a>)</li>
-			{% endif %}
-		</ul>
-	</li>
-	{% endfor %}
-</ol>
-
+<script src="/dist/project.js"></script>
 
 {% endblock %}

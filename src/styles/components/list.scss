@@ -1,0 +1,155 @@
+.list {
+	margin:  0;
+	padding: 0;
+	list-style: none;
+	font-size: 0;
+	line-height: 0;
+}
+
+.list__item {
+	font-size: $font-size-body;
+	line-height: $line-height-body;
+}
+
+// Inline
+.list--horizontal {
+	> .list__item {
+		display: inline-block;
+		margin-right: $grid-gutter;
+		
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+	
+	&.list--vertical-gutter {
+		margin-bottom: -$grid-gutter;
+		> .list__item {
+			margin-bottom: $grid-gutter;
+		}
+	}
+}
+
+// Block List
+.list--vertical {
+	> .list__item {
+		display: block;
+		margin-bottom: $grid-gutter;
+		
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+}
+
+// Vertical Align
+.list.align--middle {
+	> .list__item {
+		vertical-align: middle;
+	}
+}
+
+// Extra Gutter Sizes
+@each $gutter-name, $gutter-size in $grid-gutter-extra {
+	.list--vertical.list--gutter-#{$gutter-name} {
+		> .list__item {
+			margin-bottom: $gutter-size;
+			
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+	
+	.list--horizontal.list--gutter-#{$gutter-name} {
+		> .list__item {
+			margin-right: $gutter-size;
+			
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+		
+		&.list--vertical-gutter {
+			margin-bottom: -$gutter-size;
+			> .list__item {
+				margin-bottom: $gutter-size;
+			}
+		}
+	}
+}
+
+// Responsive Orientation
+@each $breakpoint-name, $breakpoint-size in $breakpoints {
+	@media (min-width: #{$breakpoint-size}) {
+		.list--horizontal--#{$breakpoint-name} {
+			> .list__item {
+				display: inline-block;
+				margin-right: $grid-gutter;
+				
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+			
+			&.list--vertical-gutter {
+				margin-bottom: -$grid-gutter;
+				
+				> .list__item {
+					margin-bottom: $grid-gutter;
+				}
+			}
+		}
+
+		// Block List
+		.list--vertical--#{$breakpoint-name} {
+			> .list__item {
+				display: block;
+				margin-bottom: $grid-gutter;
+				
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+	}
+}
+
+// Responsive Gutters
+@each $breakpoint-name, $breakpoint-size in $breakpoints {
+	@media (min-width: #{$breakpoint-size}) {
+		@each $gutter-name, $gutter-size in $grid-gutter-extra {
+			.list--vertical.list--gutter-#{$gutter-name}--#{$breakpoint-name},
+			.list--vertical--#{$breakpoint-name}.list--gutter-#{$gutter-name}--#{$breakpoint-name},
+			.list--vertical--#{$breakpoint-name}.list--gutter-#{$gutter-name} {
+				> .list__item {
+					margin-bottom: $gutter-size;
+					
+					&:last-child {
+						margin-bottom: 0;
+					}
+				}
+			}
+			
+			.list--horizontal.list--gutter-#{$gutter-name}--#{$breakpoint-name},
+			.list--horizontal--#{$breakpoint-name}.list--gutter-#{$gutter-name}--#{$breakpoint-name},
+			.list--horizontal--#{$breakpoint-name}.list--gutter-#{$gutter-name} {
+				> .list__item {
+					margin-right: $gutter-size;
+					
+					&:last-child {
+						margin-right: 0;
+					}
+				}
+				
+				&.list--vertical-gutter {
+					margin-bottom: -$gutter-size;
+					
+					> .list__item {
+						margin-bottom: $gutter-size;
+					}
+				}
+			}
+		}
+	}
+}

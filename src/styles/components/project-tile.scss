@@ -1,0 +1,14 @@
+.project-tile {
+	img {
+		border-radius: 4px;
+	}
+
+	&:hover,
+	&:focus {
+		outline: none;
+
+		img {
+			box-shadow: 0 0 0 2px color(gray), 0 0 0 7px color(blue);
+		}
+	}
+}
