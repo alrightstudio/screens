@@ -6,6 +6,7 @@ export default ({
 }) => (
 	<div class="project-canvas">
 		<img
+			key={url}
 			class="db full-width project-canvas__img"
 			src={url}
 			style={{maxWidth}}

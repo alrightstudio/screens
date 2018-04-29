@@ -4539,6 +4539,7 @@ var ProjectCanvas = (function (_ref) {
 		"div",
 		{ "class": "project-canvas" },
 		h("img", {
+			key: url,
 			"class": "db full-width project-canvas__img",
 			src: url,
 			style: { maxWidth: maxWidth }
