@@ -3,7 +3,7 @@
 Simple screen prototyping tool built on top of CraftCMS. It's like Invision or Marvel, but free!
 
 ![Client Index](assets/client_index.png)
-![Project View](assets/project_detai.png)
+![Project View](assets/project_detail.png)
 
 ## Requirements
 - MAMP
