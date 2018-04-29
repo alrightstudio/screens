@@ -18,7 +18,7 @@ const ProjectHeader = ({
 	});
 
 	const screenSizeButtons = (
-		<ul class="list list--horizontal list--gutter-small">{orderedAvailableScreenSizes.map(size => {
+		<ul class="list list--horizontal list--gutter-smaller">{orderedAvailableScreenSizes.map(size => {
 			const isActive = (size === screenSize);
 			const onClick = () => onSelectScreenSize(size);
 			const buttonClassName = classNames('button--primary', {
@@ -54,7 +54,7 @@ const ProjectHeader = ({
 				<div class="col c6 c4--lg">
 					<div class="media media--horizontal media--forward gutter--small align--bottom">
 						<div class="media__fixed">
-							<ul class="list list--horizontal list--gutter-small">
+							<ul class="list list--horizontal list--gutter-smaller">
 								<li class="list__item">
 									<button
 										class="button--primary"

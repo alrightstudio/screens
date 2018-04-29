@@ -4450,7 +4450,7 @@ var ProjectHeader = function ProjectHeader(_ref) {
 
 	var screenSizeButtons = h(
 		'ul',
-		{ 'class': 'list list--horizontal list--gutter-small' },
+		{ 'class': 'list list--horizontal list--gutter-smaller' },
 		orderedAvailableScreenSizes.map(function (size) {
 			var isActive = size === screenSize;
 			var onClick = function onClick() {
@@ -4508,7 +4508,7 @@ var ProjectHeader = function ProjectHeader(_ref) {
 						{ 'class': 'media__fixed' },
 						h(
 							'ul',
-							{ 'class': 'list list--horizontal list--gutter-small' },
+							{ 'class': 'list list--horizontal list--gutter-smaller' },
 							h(
 								'li',
 								{ 'class': 'list__item' },
