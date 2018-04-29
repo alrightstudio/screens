@@ -6,3 +6,4 @@ Simple screen prototyping tool built on top of CraftCMS.
 
 * Frontend app
 * Proper migrations
+* Screen URLs

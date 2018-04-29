@@ -1,0 +1,43 @@
+%button {
+	display: inline-block;
+	height: $button-height;
+	font-family: $font-family-body;
+	font-size: $button-font-size;
+	font-weight: $button-font-weight;
+	line-height: ($button-height - 4px);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	padding: 0 10px;
+	border: 2px solid black;
+	border-radius: 4px;
+	background: none;
+	color: white;
+	cursor: pointer;
+	user-select: none;
+	
+	&:focus {
+		outline: none;
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		border-color: color(blue);
+	}
+}
+
+button {
+	font-size: inherit;
+	font-family: inherit;
+	font-weight: inherit;
+	display: inline-block;
+}
+
+.button--primary {
+	@extend %button;
+
+	&.active {
+		background: color(blue);
+		border-color: color(blue);
+	}
+}
