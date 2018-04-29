@@ -49,48 +49,50 @@ const ProjectHeader = ({
 	);
 
 	return (
-		<div class="grid-container contained pt2 pb2">
-			<div class="row">
-				<div class="col c6 c4--lg">
-					<div class="media media--horizontal media--forward gutter--small align--bottom">
-						<div class="media__fixed">
-							<ul class="list list--horizontal list--gutter-smaller">
-								<li class="list__item">
-									<button
-										class="button--primary"
-										onClick={goToPreviousScreen}>
-										←
-									</button>
-								</li>
-								<li class="list__item">
-									<button
-										class="button--primary"
-										onClick={goToNextScreen}>
-										→
-									</button>
-								</li>
-							</ul>
-						</div>
-						<div class="media__fluid">
-							<div>
-								{title}
+		<div class="bg--gray">
+			<div class="grid-container contained pt2 pb2">
+				<div class="row">
+					<div class="col c6 c4--lg">
+						<div class="media media--horizontal media--forward gutter--small align--bottom">
+							<div class="media__fixed">
+								<ul class="list list--horizontal list--gutter-smaller">
+									<li class="list__item">
+										<button
+											class="button--primary"
+											onClick={goToPreviousScreen}>
+											←
+										</button>
+									</li>
+									<li class="list__item">
+										<button
+											class="button--primary"
+											onClick={goToNextScreen}>
+											→
+										</button>
+									</li>
+								</ul>
+							</div>
+							<div class="media__fluid">
+								<div>
+									{title}
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col c6 c4--lg tc--lg tr">
-					<div class="show--lg">
-						{screenSizeButtons}
+					<div class="col c6 c4--lg tc--lg tr">
+						<div class="show--lg">
+							{screenSizeButtons}
+						</div>
+						<div class="hide--lg">
+							{screenSizeSelect}
+						</div>
 					</div>
-					<div class="hide--lg">
-						{screenSizeSelect}
+					<div class="col c4 tr show--lg">
+						<a class="button--primary"
+							href={closeUrl}>
+							Close
+						</a>
 					</div>
-				</div>
-				<div class="col c4 tr show--lg">
-					<a class="button--primary"
-						href={closeUrl}>
-						Close
-					</a>
 				</div>
 			</div>
 		</div>

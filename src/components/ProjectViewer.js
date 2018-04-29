@@ -119,6 +119,7 @@ export default createClass({
 				<ProjectCanvas
 					url={currentImage.url}
 					maxWidth={maxWidth}
+					backgroundColor={currentScreen.backgroundColor}
 				/>
 			</div>
 		);

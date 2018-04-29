@@ -13,6 +13,7 @@
 		{
 			id: {{ screen.id }},
 			title: {{ screen.screenTitle | json_encode | raw }},
+			backgroundColor: {{ screen.backgroundColor | json_encode | raw }},
 			images: {
 				{% if screen.desktop.desktopImage|length %}
 				desktop: {

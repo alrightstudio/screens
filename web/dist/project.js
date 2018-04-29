@@ -4493,79 +4493,83 @@ var ProjectHeader = function ProjectHeader(_ref) {
 
 	return h(
 		'div',
-		{ 'class': 'grid-container contained pt2 pb2' },
+		{ 'class': 'bg--gray' },
 		h(
 			'div',
-			{ 'class': 'row' },
+			{ 'class': 'grid-container contained pt2 pb2' },
 			h(
 				'div',
-				{ 'class': 'col c6 c4--lg' },
+				{ 'class': 'row' },
 				h(
 					'div',
-					{ 'class': 'media media--horizontal media--forward gutter--small align--bottom' },
+					{ 'class': 'col c6 c4--lg' },
 					h(
 						'div',
-						{ 'class': 'media__fixed' },
-						h(
-							'ul',
-							{ 'class': 'list list--horizontal list--gutter-smaller' },
-							h(
-								'li',
-								{ 'class': 'list__item' },
-								h(
-									'button',
-									{
-										'class': 'button--primary',
-										onClick: goToPreviousScreen },
-									'\u2190'
-								)
-							),
-							h(
-								'li',
-								{ 'class': 'list__item' },
-								h(
-									'button',
-									{
-										'class': 'button--primary',
-										onClick: goToNextScreen },
-									'\u2192'
-								)
-							)
-						)
-					),
-					h(
-						'div',
-						{ 'class': 'media__fluid' },
+						{ 'class': 'media media--horizontal media--forward gutter--small align--bottom' },
 						h(
 							'div',
-							null,
-							title
+							{ 'class': 'media__fixed' },
+							h(
+								'ul',
+								{ 'class': 'list list--horizontal list--gutter-smaller' },
+								h(
+									'li',
+									{ 'class': 'list__item' },
+									h(
+										'button',
+										{
+											'class': 'button--primary',
+											onClick: goToPreviousScreen },
+										'\u2190'
+									)
+								),
+								h(
+									'li',
+									{ 'class': 'list__item' },
+									h(
+										'button',
+										{
+											'class': 'button--primary',
+											onClick: goToNextScreen },
+										'\u2192'
+									)
+								)
+							)
+						),
+						h(
+							'div',
+							{ 'class': 'media__fluid' },
+							h(
+								'div',
+								null,
+								title
+							)
 						)
 					)
-				)
-			),
-			h(
-				'div',
-				{ 'class': 'col c6 c4--lg tc--lg tr' },
-				h(
-					'div',
-					{ 'class': 'show--lg' },
-					screenSizeButtons
 				),
 				h(
 					'div',
-					{ 'class': 'hide--lg' },
-					screenSizeSelect
-				)
-			),
-			h(
-				'div',
-				{ 'class': 'col c4 tr show--lg' },
+					{ 'class': 'col c6 c4--lg tc--lg tr' },
+					h(
+						'div',
+						{ 'class': 'show--lg' },
+						screenSizeButtons
+					),
+					h(
+						'div',
+						{ 'class': 'hide--lg' },
+						screenSizeSelect
+					)
+				),
 				h(
-					'a',
-					{ 'class': 'button--primary',
-						href: closeUrl },
-					'Close'
+					'div',
+					{ 'class': 'col c4 tr show--lg' },
+					h(
+						'a',
+						{ 'class': 'button--primary',
+							href: closeUrl },
+						'Close'
+					)
 				)
 			)
 		)
@@ -4576,19 +4580,43 @@ ProjectHeader.defaultProps = {
 	availableScreenSizes: []
 };
 
-var ProjectCanvas = (function (_ref) {
-	var url = _ref.url,
-	    maxWidth = _ref.maxWidth;
-	return h(
-		"div",
-		{ "class": "project-canvas" },
-		h("img", {
-			key: url,
-			"class": "db full-width project-canvas__img",
-			src: url,
-			style: { maxWidth: maxWidth }
-		})
-	);
+var ProjectCanvas = createClass({
+	componentDidMount: function componentDidMount() {
+		this.setBackgroundColor();
+	},
+	componentWillUnmount: function componentWillUnmount() {
+		this.resetBackgroundColor();
+	},
+	componentDidUpdate: function componentDidUpdate() {
+		this.setBackgroundColor();
+	},
+	setBackgroundColor: function setBackgroundColor() {
+		if (this.props.backgroundColor) {
+			document.body.style.backgroundColor = this.props.backgroundColor;
+		} else {
+			this.resetBackgroundColor();
+		}
+	},
+	resetBackgroundColor: function resetBackgroundColor() {
+		document.body.style.backgroundColor = null;
+	},
+	render: function render$$1() {
+		var _props = this.props,
+		    url = _props.url,
+		    maxWidth = _props.maxWidth;
+
+
+		return h(
+			'div',
+			{ 'class': 'project-canvas' },
+			h('img', {
+				key: url,
+				'class': 'db full-width project-canvas__img',
+				src: url,
+				style: { maxWidth: maxWidth }
+			})
+		);
+	}
 });
 
 var ProjectViewer = createClass({
@@ -4704,7 +4732,8 @@ var ProjectViewer = createClass({
 			h('hr', null),
 			h(ProjectCanvas, {
 				url: currentImage.url,
-				maxWidth: maxWidth
+				maxWidth: maxWidth,
+				backgroundColor: currentScreen.backgroundColor
 			})
 		);
 	}

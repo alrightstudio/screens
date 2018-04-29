@@ -75,6 +75,9 @@ a:focus:active, button:focus:active {
 *::selection {
   background: rgba(0, 84, 255, 0.5); }
 
+html, body {
+  min-height: 100%; }
+
 .color--white {
   color: #fff; }
 
