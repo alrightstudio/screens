@@ -34,6 +34,6 @@ $ yarn start
 
 ## To Do
 
-* Proper migrations
+* Proper migration for setup
 * Screen specific URLs
-* Loading states maybe?
+* More prototyping tools like image map hyperlinks and transitions
