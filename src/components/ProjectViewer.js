@@ -112,6 +112,8 @@ export default createClass({
 					availableScreenSizes={availableScreenSizes}
 					onSelectScreenSize={this.setScreenSize}
 					closeUrl={`/${client.uri}`}
+					goToPreviousScreen={this.goToPreviousScreen}
+					goToNextScreen={this.goToNextScreen}
 				/>
 				<hr />
 				<ProjectCanvas

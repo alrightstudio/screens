@@ -4440,7 +4440,9 @@ var ProjectHeader = function ProjectHeader(_ref) {
 	    screenSize = _ref.screenSize,
 	    availableScreenSizes = _ref.availableScreenSizes,
 	    onSelectScreenSize = _ref.onSelectScreenSize,
-	    closeUrl = _ref.closeUrl;
+	    closeUrl = _ref.closeUrl,
+	    goToPreviousScreen = _ref.goToPreviousScreen,
+	    goToNextScreen = _ref.goToNextScreen;
 
 	var orderedAvailableScreenSizes = filter_1$1(SCREEN_SIZE_ORDER, function (size) {
 		return includes_1(availableScreenSizes, size);
@@ -4497,12 +4499,54 @@ var ProjectHeader = function ProjectHeader(_ref) {
 			{ 'class': 'row' },
 			h(
 				'div',
-				{ 'class': 'col c4' },
-				title
+				{ 'class': 'col c6 c4--lg' },
+				h(
+					'div',
+					{ 'class': 'media media--horizontal media--forward gutter--small align--bottom' },
+					h(
+						'div',
+						{ 'class': 'media__fixed' },
+						h(
+							'ul',
+							{ 'class': 'list list--horizontal list--gutter-small' },
+							h(
+								'li',
+								{ 'class': 'list__item' },
+								h(
+									'button',
+									{
+										'class': 'button--primary',
+										onClick: goToPreviousScreen },
+									'\u2190'
+								)
+							),
+							h(
+								'li',
+								{ 'class': 'list__item' },
+								h(
+									'button',
+									{
+										'class': 'button--primary',
+										onClick: goToNextScreen },
+									'\u2192'
+								)
+							)
+						)
+					),
+					h(
+						'div',
+						{ 'class': 'media__fluid' },
+						h(
+							'div',
+							null,
+							title
+						)
+					)
+				)
 			),
 			h(
 				'div',
-				{ 'class': 'col c4 tc' },
+				{ 'class': 'col c6 c4--lg tc--lg tr' },
 				h(
 					'div',
 					{ 'class': 'show--lg' },
@@ -4516,10 +4560,10 @@ var ProjectHeader = function ProjectHeader(_ref) {
 			),
 			h(
 				'div',
-				{ 'class': 'col c4 tr' },
+				{ 'class': 'col c4 tr show--lg' },
 				h(
 					'a',
-					{ 'class': 'link--hover',
+					{ 'class': 'button--primary',
 						href: closeUrl },
 					'Close'
 				)
@@ -4653,7 +4697,9 @@ var ProjectViewer = createClass({
 				screenSize: currentScreenSize,
 				availableScreenSizes: availableScreenSizes,
 				onSelectScreenSize: this.setScreenSize,
-				closeUrl: '/' + client.uri
+				closeUrl: '/' + client.uri,
+				goToPreviousScreen: this.goToPreviousScreen,
+				goToNextScreen: this.goToNextScreen
 			}),
 			h('hr', null),
 			h(ProjectCanvas, {

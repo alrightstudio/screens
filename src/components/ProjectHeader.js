@@ -10,6 +10,8 @@ const ProjectHeader = ({
 	availableScreenSizes,
 	onSelectScreenSize,
 	closeUrl,
+	goToPreviousScreen,
+	goToNextScreen,
 }) => {
 	const orderedAvailableScreenSizes = filter(SCREEN_SIZE_ORDER, size => {
 		return includes(availableScreenSizes, size);
@@ -49,10 +51,34 @@ const ProjectHeader = ({
 	return (
 		<div class="grid-container contained pt2 pb2">
 			<div class="row">
-				<div class="col c4">
-					{title}
+				<div class="col c6 c4--lg">
+					<div class="media media--horizontal media--forward gutter--small align--bottom">
+						<div class="media__fixed">
+							<ul class="list list--horizontal list--gutter-small">
+								<li class="list__item">
+									<button
+										class="button--primary"
+										onClick={goToPreviousScreen}>
+										←
+									</button>
+								</li>
+								<li class="list__item">
+									<button
+										class="button--primary"
+										onClick={goToNextScreen}>
+										→
+									</button>
+								</li>
+							</ul>
+						</div>
+						<div class="media__fluid">
+							<div>
+								{title}
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="col c4 tc">
+				<div class="col c6 c4--lg tc--lg tr">
 					<div class="show--lg">
 						{screenSizeButtons}
 					</div>
@@ -60,8 +86,8 @@ const ProjectHeader = ({
 						{screenSizeSelect}
 					</div>
 				</div>
-				<div class="col c4 tr">
-					<a class="link--hover"
+				<div class="col c4 tr show--lg">
+					<a class="button--primary"
 						href={closeUrl}>
 						Close
 					</a>
