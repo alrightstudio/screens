@@ -1,7 +1,7 @@
 {% extends "_layout" %}
 {% block content %}
 
-{% if currentUser %}
+{% if currentUser and currentUser.admin %}
 
 <div class="grid-container contained pt2 pb2">
 	<h1>{{ siteName }}</h1>

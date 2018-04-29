@@ -1,7 +1,7 @@
 {% extends "_layout" %}
 {% block content %}
 
-{% if currentUser %}
+{% if currentUser and currentUser.admin %}
 
 <div class="grid-container contained pt2 pb2">
 	<div class="media media--horizontal media--forward gutter--small align--middle">

@@ -41,3 +41,4 @@ $ yarn start
 * Proper migration for setup
 * Screen specific URLs
 * More prototyping tools like image map hyperlinks and transitions
+* Better image compression (imgix)
