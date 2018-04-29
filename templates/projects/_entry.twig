@@ -16,8 +16,8 @@
 	<li>
 		<b>{{ screen.screenTitle }}</b> - {{ screen.id }} <br/>
 		<ul>
-			{% if screen.desktop.image|length %}
-			{% set desktopScreen = screen.desktop.image.first() %}
+			{% if screen.desktop.desktopImage|length %}
+			{% set desktopScreen = screen.desktop.desktopImage.first() %}
 			<li>Desktop - (<a href="{{desktopScreen.url}}">{{ desktopScreen.filename }}</a>)</li>
 			{% endif %}
 		</ul>
