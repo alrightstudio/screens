@@ -24,10 +24,14 @@ $ composer install
 ```
 $ yarn install
 ```
-3. Copy `.env.example` to `.env` and add your settings.
-4. Pull down DB backup and import into your local MySQL environment.
-5. Point `screens.local` in your hosts (via MAMP or hosts file) to the `web` directory and restart MAMP servers.
-6. Start local development server for live reload changes
+3. Run CraftCMS required permissions script
+```
+$ sh scripts/set-permissions.sh
+```
+4. Copy `.env.example` to `.env` and add your settings.
+5. Pull down DB backup and import into your local MySQL environment.
+6. Point `screens.local` in your hosts (via MAMP or hosts file) to the `web` directory and restart MAMP servers.
+7. Start local development server for live reload changes
 ```
 $ yarn start
 ```
