@@ -4718,8 +4718,8 @@ hr {
 @media (min-width: 1000px) {
   .project-canvas__viewport--mobile,
   .project-canvas__viewport--tablet {
-    margin-top: 40px;
+    margin: 40px;
     border-radius: 4px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     overflow-y: auto;
-    max-height: calc(100vh - 150px); } }
+    max-height: calc(100vh - 70px - 40px - 40px); } }
