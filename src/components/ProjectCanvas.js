@@ -1,43 +1,33 @@
 import {h} from 'preact';
-import createClass from '../utils/createClass';
+import classNames from 'classnames';
 
-export default createClass({
-	componentDidMount() {
-		this.setBackgroundColor();
-	},
+export default ({
+	url,
+	maxWidth,
+	backgroundColor,
+	screenSize,
+}) => {
+	const canvasStyle = (screenSize === 'desktop') && {
+		backgroundColor,
+	};
+	const viewportClassName = classNames(
+		'project-canvas__viewport',
+		`project-canvas__viewport--${screenSize}`
+	);
 
-	componentWillUnmount() {
-		this.resetBackgroundColor();
-	},
-
-	componentDidUpdate() {
-		this.setBackgroundColor();
-	},
-
-	setBackgroundColor() {
-		if (this.props.backgroundColor) {
-			document.body.style.backgroundColor = this.props.backgroundColor;
-		} else {
-			this.resetBackgroundColor();
-		}
-	},
-
-	resetBackgroundColor() {
-		document.body.style.backgroundColor = null;
-	},
-
-	render() {
-		const {url, maxWidth} = this.props;
-
-		return (
-			<div class="project-canvas">
+	return (
+		<div
+			style={canvasStyle}
+			class="project-canvas">
+			<div
+				style={{maxWidth}}
+				class={viewportClassName}>
 				<img
 					key={url}
-					class="db full-width project-canvas__img"
+					class="full-width"
 					src={url}
-					style={{maxWidth}}
 				/>
 			</div>
-		);
-	}
-});
+		</div>
+	);
+};
