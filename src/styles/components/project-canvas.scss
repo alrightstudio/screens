@@ -5,7 +5,7 @@
 .project-canvas__viewport--mobile,
 .project-canvas__viewport--tablet {
 	@include breakpoint(lg) {
-		margin: 40px;
+		margin: 40px auto;
 		border-radius: 4px;
 		box-shadow: 0 0 30px rgba(black, 0.5);
 		overflow-y: auto;

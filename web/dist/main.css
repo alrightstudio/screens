@@ -4718,7 +4718,7 @@ hr {
 @media (min-width: 1000px) {
   .project-canvas__viewport--mobile,
   .project-canvas__viewport--tablet {
-    margin: 40px;
+    margin: 40px auto;
     border-radius: 4px;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
     overflow-y: auto;
