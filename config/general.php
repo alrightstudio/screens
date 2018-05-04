@@ -16,6 +16,7 @@ return [
         'omitScriptNameInUrls' => true,
         'cpTrigger' => 'admin',
         'securityKey' => getenv('SECURITY_KEY'),
+        'maxUploadFileSize' => 67108864 // 64MB
     ],
     'dev' => [
         'siteUrl' => null,
