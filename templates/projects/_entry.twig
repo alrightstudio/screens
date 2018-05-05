@@ -3,6 +3,8 @@
 {% extends "_layout" %}
 {% block content %}
 
+{% set imageTransform = {auto: 'compress,format'} %}
+
 <div id="mount-project"></div>
 
 <script>
@@ -16,25 +18,43 @@
 			backgroundColor: {{ screen.backgroundColor | json_encode | raw }},
 			images: {
 				{% if screen.desktop.desktopImage|length %}
+				{% set desktopAsset = screen.desktop.desktopImage.one() %}
+				{% if craft.imgix is defined %}
+					{% set desktopUrl = craft.imgix.transformImage(desktopAsset, imageTransform).url %}
+				{% else %}
+					{% set desktopUrl = desktopAsset.url %}
+				{% endif %}
 				desktop: {
-					url: {{ screen.desktop.desktopImage.one().url | json_encode | raw }},
-					width: {{ screen.desktop.desktopImage.one().width }},
+					url: {{ desktopUrl | json_encode | raw }},
+					width: {{ desktopAsset.width }},
 					retina: {{ screen.desktop.desktopRetina | json_encode | raw }},
 				},
 				{% endif %}
 
 				{% if screen.tablet.tabletImage|length %}
+				{% set tabletAsset = screen.tablet.tabletImage.one() %}
+				{% if craft.imgix is defined %}
+					{% set tabletUrl = craft.imgix.transformImage(tabletAsset, imageTransform).url %}
+				{% else %}
+					{% set tabletUrl = desktopAsset.url %}
+				{% endif %}
 				tablet: {
-					url: {{ screen.tablet.tabletImage.one().url | json_encode | raw }},
-					width: {{ screen.tablet.tabletImage.one().width }},
+					url: {{ tabletUrl | json_encode | raw }},
+					width: {{ tabletAsset.width }},
 					retina: {{ screen.tablet.tabletRetina | json_encode | raw }},
 				},
 				{% endif %}
 
 				{% if screen.mobile.mobileImage|length %}
+				{% set mobileAsset = screen.mobile.mobileImage.one() %}
+				{% if craft.imgix is defined %}
+					{% set mobileUrl = craft.imgix.transformImage(mobileAsset, imageTransform).url %}
+				{% else %}
+					{% set mobileUrl = desktopAsset.url %}
+				{% endif %}
 				mobile: {
-					url: {{ screen.mobile.mobileImage.one().url | json_encode | raw }},
-					width: {{ screen.mobile.mobileImage.one().width }},
+					url: {{ mobileUrl | json_encode | raw }},
+					width: {{ mobileAsset.width }},
 					retina: {{ screen.mobile.mobileRetina | json_encode | raw }},
 				},
 				{% endif %}

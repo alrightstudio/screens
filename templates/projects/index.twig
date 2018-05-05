@@ -24,44 +24,90 @@
 		<div class="col c6 c4--md c3--lg c2--xl mb4 tc">
 			<a class="project-tile link--target-hover db" href="{{ entry.url }}">
 				{% set screen = entry.screens.one() %}
-				{% set thumbnailTransform = {
-					mode: 'crop',
-					width: 800,
-					height: 600,
-					quality: 75,
-					position: 'top-center'
-				} %}
+				{% if craft.imgix is defined %}
+					{% set thumbnailTransform = {
+						crop: 'top',
+						fit: 'crop',
+						width: 800,
+						height: 600,
+						auto: 'compress,format',
+					} %}
+				{% else %}
+					{% set thumbnailTransform = {
+						mode: 'crop',
+						width: 800,
+						height: 600,
+						quality: 75,
+						position: 'top-center'
+					} %}
+				{% endif %}
+				
 				{% if screen %}
 					{% if screen.desktop.desktopImage.one() %}
 						{% set screenAsset = screen.desktop.desktopImage.one() %}
-						{% set thumbnailTransform = {
-							mode: 'crop',
-							width: 800,
-							height: 600,
-							quality: 75,
-							position: 'top-center'
-						} %}
+						{% if craft.imgix is defined %}
+							{% set thumbnailTransform = {
+								crop: 'top',
+								fit: 'crop',
+								width: 800,
+								height: 600,
+								auto: 'compress,format',
+							} %}
+						{% else %}
+							{% set thumbnailTransform = {
+								mode: 'crop',
+								width: 800,
+								height: 600,
+								quality: 75,
+								position: 'top-center'
+							} %}
+						{% endif %}
 					{% elseif screen.tablet.tabletImage.one() %}
 						{% set screenAsset = screen.tablet.tabletImage.one() %}
-						{% set thumbnailTransform = {
-							mode: 'crop',
-							width: 600,
-							height: 800,
-							quality: 75,
-							position: 'top-center'
-						} %}
+						{% if craft.imgix is defined %}
+							{% set thumbnailTransform = {
+								crop: 'top',
+								fit: 'crop',
+								width: 600,
+								height: 800,
+								auto: 'compress,format',
+							} %}
+						{% else %}
+							{% set thumbnailTransform = {
+								mode: 'crop',
+								width: 600,
+								height: 800,
+								quality: 75,
+								position: 'top-center'
+							} %}
+						{% endif %}
 					{% elseif screen.mobile.mobileImage.one() %}
 						{% set screenAsset = screen.mobile.mobileImage.one() %}
-						{% set thumbnailTransform = {
-							mode: 'crop',
-							width: 600,
-							height: 1000,
-							quality: 75,
-							position: 'top-center'
-						} %}
+						{% if craft.imgix is defined %}
+							{% set thumbnailTransform = {
+								crop: 'top',
+								fit: 'crop',
+								width: 600,
+								height: 1000,
+								auto: 'compress,format',
+							} %}
+						{% else %}
+							{% set thumbnailTransform = {
+								mode: 'crop',
+								width: 600,
+								height: 1000,
+								quality: 75,
+								position: 'top-center'
+							} %}
+						{% endif %}
 					{% endif %}
 					{% if screenAsset %}
-						<img class="db mb1 mb2--lg" src="{{ screenAsset.getUrl(thumbnailTransform) }}" />
+						{% if craft.imgix is defined %}
+							{% set transformedUrl = craft.imgix.transformImage(screenAsset, thumbnailTransform).url %}
+						{% else %}
+							{% set transformedUrl = screenAsset.getUrl(thumbnailTransform) %}
+						{% endif %}
+						<img class="db mb1 mb2--lg" src="{{ transformedUrl }}" />
 					{% endif %}
 				{% endif %}
 				<span class="db link__target">{{ entry.title }}</span>
