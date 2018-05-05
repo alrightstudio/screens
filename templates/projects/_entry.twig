@@ -19,7 +19,7 @@
 			images: {
 				{% if screen.desktop.desktopImage|length %}
 				{% set desktopAsset = screen.desktop.desktopImage.one() %}
-				{% if craft.imgix is defined %}
+				{% if craft.app.plugins.isPluginEnabled('imgix') %}
 					{% set desktopUrl = craft.imgix.transformImage(desktopAsset, imageTransform).url %}
 				{% else %}
 					{% set desktopUrl = desktopAsset.url %}
@@ -33,7 +33,7 @@
 
 				{% if screen.tablet.tabletImage|length %}
 				{% set tabletAsset = screen.tablet.tabletImage.one() %}
-				{% if craft.imgix is defined %}
+				{% if craft.app.plugins.isPluginEnabled('imgix') %}
 					{% set tabletUrl = craft.imgix.transformImage(tabletAsset, imageTransform).url %}
 				{% else %}
 					{% set tabletUrl = desktopAsset.url %}
@@ -47,7 +47,7 @@
 
 				{% if screen.mobile.mobileImage|length %}
 				{% set mobileAsset = screen.mobile.mobileImage.one() %}
-				{% if craft.imgix is defined %}
+				{% if craft.app.plugins.isPluginEnabled('imgix') %}
 					{% set mobileUrl = craft.imgix.transformImage(mobileAsset, imageTransform).url %}
 				{% else %}
 					{% set mobileUrl = desktopAsset.url %}
