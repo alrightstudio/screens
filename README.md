@@ -54,4 +54,4 @@ This will do a few things - compress assets, commit those as a new deployment to
 * Proper migration for setup
 * Screen specific URLs
 * More prototyping tools like image map hyperlinks and transitions
-* Better image compression (imgix)
+* ~Better image compression (imgix)~
