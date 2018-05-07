@@ -36,7 +36,7 @@
 				{% if craft.app.plugins.isPluginEnabled('imgix') %}
 					{% set tabletUrl = craft.imgix.transformImage(tabletAsset, imageTransform).url %}
 				{% else %}
-					{% set tabletUrl = desktopAsset.url %}
+					{% set tabletUrl = tabletAsset.url %}
 				{% endif %}
 				tablet: {
 					url: {{ tabletUrl | json_encode | raw }},
@@ -50,7 +50,7 @@
 				{% if craft.app.plugins.isPluginEnabled('imgix') %}
 					{% set mobileUrl = craft.imgix.transformImage(mobileAsset, imageTransform).url %}
 				{% else %}
-					{% set mobileUrl = desktopAsset.url %}
+					{% set mobileUrl = mobileAsset.url %}
 				{% endif %}
 				mobile: {
 					url: {{ mobileUrl | json_encode | raw }},
