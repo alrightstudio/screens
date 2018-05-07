@@ -51,7 +51,9 @@ This will do a few things - compress assets, commit those as a new deployment to
 
 ## To Do
 
-* Proper migration for setup
 * Screen specific URLs
+* Preload assets and keep scroll position
+* Hide toolbar button
+* Fix image compression (imgix)
+* Proper migration for setup
 * More prototyping tools like image map hyperlinks and transitions
-* ~Better image compression (imgix)~

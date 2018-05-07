@@ -16,15 +16,15 @@ export default createClass({
 
 	getInitialState() {
 		const currentScreenIndex = 0;
-		let currentScreenSize = 'desktop';
+		let preferredScreenSize = 'desktop';
 		const currentScreen = this.props.screens[currentScreenIndex];
-		const currentImage = currentScreen.images[currentScreenSize];
+		const preferredImage = currentScreen.images[preferredScreenSize];
 
 		// Go to a different screen size if not available
-		if (!currentImage) {
+		if (!preferredImage) {
 			for (let i = 0; i < SCREEN_SIZE_ORDER.length; i++) {
 				if (currentScreen.images[SCREEN_SIZE_ORDER[i]]) {
-					currentScreenSize = SCREEN_SIZE_ORDER[i];
+					preferredScreenSize = SCREEN_SIZE_ORDER[i];
 					break;
 				}
 			}
@@ -32,7 +32,7 @@ export default createClass({
 
 		return {
 			currentScreenIndex,
-			currentScreenSize,
+			preferredScreenSize,
 		};
 	},
 
@@ -65,7 +65,9 @@ export default createClass({
 			nextIndex = currentScreenIndex - 1;
 		}
 
-		this.setScreenIndex(nextIndex);
+		this.setState({
+			currentScreenIndex: nextIndex,
+		});
 	},
 
 	goToNextScreen() {
@@ -81,41 +83,33 @@ export default createClass({
 			nextIndex = currentScreenIndex + 1;
 		}
 
-		this.setScreenIndex(nextIndex);
+		this.setState({
+			currentScreenIndex: nextIndex,
+		});
 	},
 
-	setScreenIndex(nextScreenIndex) {
-		const {screens} = this.props;
-		const {currentScreenSize} = this.state;
-		const nextScreen = screens[nextScreenIndex];
-		const nextImage = nextScreen.images[currentScreenSize];
-		let nextScreenSize = currentScreenSize;
+	setPreferredScreenSize(preferredScreenSize) {
+		this.setState({preferredScreenSize});
+	},
+
+	render() {
+		const {screens, client} = this.props;
+		const {currentScreenIndex, preferredScreenSize} = this.state;
+		const currentScreen = screens[currentScreenIndex];
+		const availableScreenSizes = keys(currentScreen.images);
+		const preferredImage = currentScreen.images[preferredScreenSize];
+		let currentScreenSize = preferredScreenSize;
 
 		// Go to a different screen size if not available
-		if (!nextImage) {
+		if (!preferredImage) {
 			for (let i = 0; i < SCREEN_SIZE_ORDER.length; i++) {
-				if (nextScreen.images[SCREEN_SIZE_ORDER[i]]) {
-					nextScreenSize = SCREEN_SIZE_ORDER[i];
+				if (currentScreen.images[SCREEN_SIZE_ORDER[i]]) {
+					currentScreenSize = SCREEN_SIZE_ORDER[i];
 					break;
 				}
 			}
 		}
 
-		this.setState({
-			currentScreenIndex: nextScreenIndex,
-			currentScreenSize: nextScreenSize
-		});
-	},
-
-	setScreenSize(currentScreenSize) {
-		this.setState({currentScreenSize});
-	},
-
-	render() {
-		const {screens, client} = this.props;
-		const {currentScreenIndex, currentScreenSize} = this.state;
-		const currentScreen = screens[currentScreenIndex];
-		const availableScreenSizes = keys(currentScreen.images);
 		const currentImage = currentScreen.images[currentScreenSize];
 		const maxWidth = currentImage.retina ? currentImage.width / 2 : currentImage.width;
 
@@ -125,7 +119,7 @@ export default createClass({
 					title={currentScreen.title}
 					screenSize={currentScreenSize}
 					availableScreenSizes={availableScreenSizes}
-					onSelectScreenSize={this.setScreenSize}
+					onSelectScreenSize={this.setPreferredScreenSize}
 					closeUrl={`/${client.uri}`}
 					goToPreviousScreen={this.goToPreviousScreen}
 					goToNextScreen={this.goToNextScreen}
@@ -135,7 +129,7 @@ export default createClass({
 					url={currentImage.url}
 					maxWidth={maxWidth}
 					backgroundColor={currentScreen.backgroundColor}
-					screenSize={currentScreenSize}
+					screenSize={preferredScreenSize}
 				/>
 			</div>
 		);
