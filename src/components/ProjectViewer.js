@@ -129,7 +129,7 @@ export default createClass({
 					url={currentImage.url}
 					maxWidth={maxWidth}
 					backgroundColor={currentScreen.backgroundColor}
-					screenSize={preferredScreenSize}
+					screenSize={currentScreenSize}
 				/>
 			</div>
 		);
