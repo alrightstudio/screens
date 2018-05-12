@@ -9,6 +9,10 @@
 		border-radius: 4px;
 		box-shadow: 0 0 30px rgba(black, 0.5);
 		overflow-y: auto;
+		max-height: calc(100vh - 40px - 40px);
+	}
+
+	&.project-canvas--toolbar {
 		max-height: calc(100vh - 70px - 40px - 40px);
 	}
 }

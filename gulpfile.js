@@ -77,8 +77,9 @@ gulp.task('rollup', callback => {
 gulp.task('default', ['sass', 'rollup']);
 gulp.task('watch', ['default'], () => {
 	browserSync.init({
-		proxy: 'https://screens.local',
+		proxy: 'screens.local',
 		https: true,
+		port: 3000
 	});
 
 	gulp.watch('./src/styles/**/*.scss', ['sass']);

@@ -1,6 +1,6 @@
 import {h} from 'preact';
 import createClass from '../utils/createClass';
-import {KEY_LEFT, KEY_RIGHT, SCREEN_SIZE_ORDER} from '../utils/constants';
+import {KEY_LEFT, KEY_RIGHT, KEY_T, SCREEN_SIZE_ORDER} from '../utils/constants';
 import ProjectHeader from './ProjectHeader';
 import ProjectCanvas from './ProjectCanvas';
 import keys from 'lodash/keys';
@@ -33,6 +33,7 @@ export default createClass({
 		return {
 			currentScreenIndex,
 			preferredScreenSize,
+			isToolbarVisible: true,
 		};
 	},
 
@@ -45,10 +46,18 @@ export default createClass({
 	},
 
 	handleKeydown(event) {
-		if (event.keyCode === KEY_LEFT) {
-			this.goToPreviousScreen();
-		} else if (event.keyCode === KEY_RIGHT) {
-			this.goToNextScreen();
+		switch (event.keyCode) {
+			case (KEY_LEFT): {
+				this.goToPreviousScreen();
+				break;
+			}
+			case (KEY_RIGHT): {
+				this.goToNextScreen();
+				break;
+			}
+			case (KEY_T): {
+				this.toggleToolbar();
+			}
 		}
 	},
 
@@ -92,9 +101,17 @@ export default createClass({
 		this.setState({preferredScreenSize});
 	},
 
+	toggleToolbar() {
+		this.setState({isToolbarVisible: !this.state.isToolbarVisible});
+	},
+
+	hideToolbar() {
+		this.setState({isToolbarVisible: false});
+	},
+
 	render() {
 		const {screens, client} = this.props;
-		const {currentScreenIndex, preferredScreenSize} = this.state;
+		const {currentScreenIndex, preferredScreenSize, isToolbarVisible} = this.state;
 		const currentScreen = screens[currentScreenIndex];
 		const availableScreenSizes = keys(currentScreen.images);
 		const preferredImage = currentScreen.images[preferredScreenSize];
@@ -113,7 +130,7 @@ export default createClass({
 		const currentImage = currentScreen.images[currentScreenSize];
 		const maxWidth = currentImage.retina ? currentImage.width / 2 : currentImage.width;
 
-		return (
+		const projectHeader = isToolbarVisible && (
 			<div>
 				<ProjectHeader
 					title={currentScreen.title}
@@ -123,14 +140,26 @@ export default createClass({
 					closeUrl={`/${client.uri}`}
 					goToPreviousScreen={this.goToPreviousScreen}
 					goToNextScreen={this.goToNextScreen}
+					hideToolbar={this.hideToolbar}
 				/>
 				<hr />
-				<ProjectCanvas
-					url={currentImage.url}
-					maxWidth={maxWidth}
-					backgroundColor={currentScreen.backgroundColor}
-					screenSize={currentScreenSize}
-				/>
+			</div>
+		);
+
+		const projectCanvas = (
+			<ProjectCanvas
+				url={currentImage.url}
+				maxWidth={maxWidth}
+				backgroundColor={currentScreen.backgroundColor}
+				screenSize={currentScreenSize}
+				isToolbarVisible={isToolbarVisible}
+			/>
+		);
+
+		return (
+			<div>
+				{projectHeader}
+				{projectCanvas}
 			</div>
 		);
 	},

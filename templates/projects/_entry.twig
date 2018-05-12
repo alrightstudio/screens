@@ -4,6 +4,7 @@
 {% block content %}
 
 {% set imageTransform = {auto: 'compress,format'} %}
+{% set imageUrls = [] %}
 
 <div id="mount-project"></div>
 
@@ -24,6 +25,7 @@
 				{% else %}
 					{% set desktopUrl = desktopAsset.url %}
 				{% endif %}
+				{% set imageUrls = imageUrls | merge([desktopUrl]) %}
 				desktop: {
 					url: {{ desktopUrl | json_encode | raw }},
 					width: {{ desktopAsset.width }},
@@ -38,6 +40,7 @@
 				{% else %}
 					{% set tabletUrl = tabletAsset.url %}
 				{% endif %}
+				{% set imageUrls = imageUrls | merge([tabletUrl]) %}
 				tablet: {
 					url: {{ tabletUrl | json_encode | raw }},
 					width: {{ tabletAsset.width }},
@@ -52,6 +55,7 @@
 				{% else %}
 					{% set mobileUrl = mobileAsset.url %}
 				{% endif %}
+				{% set imageUrls = imageUrls | merge([mobileUrl]) %}
 				mobile: {
 					url: {{ mobileUrl | json_encode | raw }},
 					width: {{ mobileAsset.width }},
@@ -65,5 +69,10 @@
 </script>
 
 <script src="/dist/project.js"></script>
+
+
+{% for imageUrl in imageUrls %}
+<link rel="preload" href="{{ imageUrl }}" as="image">
+{% endfor %}
 
 {% endblock %}

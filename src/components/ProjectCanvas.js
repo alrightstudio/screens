@@ -6,14 +6,16 @@ export default ({
 	maxWidth,
 	backgroundColor,
 	screenSize,
+	isToolbarVisible,
 }) => {
 	const canvasStyle = (screenSize === 'desktop') && {
 		backgroundColor,
 	};
 	const viewportClassName = classNames(
 		'project-canvas__viewport',
-		`project-canvas__viewport--${screenSize}`
-	);
+		`project-canvas__viewport--${screenSize}`, {
+			'project-canvas--toolbar': isToolbarVisible
+		});
 
 	return (
 		<div

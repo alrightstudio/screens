@@ -12,5 +12,9 @@
 	{% block content %}
 		<p><code>{% verbatim %}{% block content %}…{% endblock %}{% endverbatim %}</code> not found.</p>
 	{% endblock %}
+	
+	{% if craft.config.devMode %}
+	<script async src="https://localhost:3000/browser-sync/browser-sync-client.js"></script>
+	{% endif %}
 </body>
 </html>

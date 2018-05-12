@@ -9,9 +9,9 @@ const ProjectHeader = ({
 	screenSize,
 	availableScreenSizes,
 	onSelectScreenSize,
-	closeUrl,
 	goToPreviousScreen,
 	goToNextScreen,
+	hideToolbar,
 }) => {
 	const orderedAvailableScreenSizes = filter(SCREEN_SIZE_ORDER, size => {
 		return includes(availableScreenSizes, size);
@@ -88,10 +88,12 @@ const ProjectHeader = ({
 						</div>
 					</div>
 					<div class="col c4 tr show--lg">
-						<a class="button--primary"
-							href={closeUrl}>
-							Close
-						</a>
+						<button
+							onClick={hideToolbar}
+							title="Press 'T' to toggle the toolbar"
+							class="button--primary">
+							Hide
+						</button>
 					</div>
 				</div>
 			</div>
